@@ -18,8 +18,18 @@ function loadNotes() {
 
 function addNote(title, body) {
     const notes = loadNotes();
-    notes.push({title: title, body: body});
-    saveNotes(notes);
+
+    // Option to avoid multiple same titles
+    const duplicateNotes = notes.filter((note) => {
+        return note.title === title;
+    });
+    if (duplicateNotes.length == 0) {
+        notes.push({title: title, body: body});
+        saveNotes(notes);
+        console.log("New note added");
+    } else {
+        console.log("A note with this title already exists");
+    }
 };
 
 
