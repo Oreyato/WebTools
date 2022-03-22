@@ -2,7 +2,7 @@ const fs = require('fs');
 
 function saveNotes(notes) {
     const dataJSON = JSON.stringify(notes);
-    fs.writeFileSync('notes.json', 'dataJSON');
+    fs.writeFileSync('notes.json', dataJSON);
 }
 
 function loadNotes() {
