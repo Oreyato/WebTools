@@ -1,5 +1,5 @@
 const yargs = require('yargs');
-// const validator = require('validator');
+const validator = require('validator');
 // const chalk = require('chalk');
 const fs = require('fs');
 const notes = require('./notes');
