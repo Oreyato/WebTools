@@ -32,4 +32,46 @@ function addNote(title, body) {
     }
 };
 
+function removeNote(title) {
+    const notes = loadNotes();
 
+    const notesToKeep = notes.filter((note) => {
+        return note.title !== title;
+    });
+    if (notesToKeep < notes.length) {
+        saveNotes(notesToKeep);
+        console.log("Note removed");
+    } else {
+        console.log("There isn't any note named " + title);
+    }
+};
+
+function listNotes() {
+    const notes = loadNotes();
+
+    console.log("NOTES:");
+    notes.forEach((note) => {
+        console.log(note.title); 
+    });
+};
+
+function readNote(title) {
+    const notes = loadNotes();
+
+    const nodeToRead = notes.find((note) => {
+        return note.title === title;
+    });
+    if (nodeToRead) {
+        console.log("Title: " + nodeToRead.title);
+        console.log("Body: " + nodeToRead.body);
+    } else {
+        console.log("There isn't any note named " + title);
+    }
+};
+
+module.exports = {
+    addNote: addNote,
+    removeNote: removeNote,
+    listNotes: listNotes,
+    readNote: readNote
+};
