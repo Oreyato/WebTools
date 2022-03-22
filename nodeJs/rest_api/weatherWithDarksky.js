@@ -11,5 +11,5 @@ const url = 'https://api.darksky.net/forecast/ad95e11dbf8fe6961a05425dea338c24/4
 request( {url: url}, (error, response) => {
     const data = JSON.parse(response.body);
     console.log(data.currently);
-    // console.log("It is currently " + data.currently.temperature + "°C out, and there is " + data.currently.precipProbability + "% risk of rain");   
+    console.log("It is currently " + data.currently.temperature + "°C out, and there is " + data.currently.precipProbability + "% risk of rain");   
 });
