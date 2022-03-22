@@ -26,3 +26,5 @@ Note taking app commands:
 - node app2.js remove --title="Title"
 - node app2.js read --title="Title"
 - node app2.js list
+
+## Rest API
