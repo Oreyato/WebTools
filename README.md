@@ -39,3 +39,5 @@ Display current weather on location :
 Modify location :
 
 - modify the first argument of the function "weather" with the city you're interested in
+
+### Weather app
