@@ -38,7 +38,24 @@ function displayWeather(data, callback) {
         } else {
             const {temperature, precipProbability} = response.body.currently; 
 
-            callback(undefined, response.body.daily.data[0].summary + " Il fait actuellement " + temperature + '°C et il y a ' + precipProbability + "% de chance qu'il pleuve");
+            callback(undefined, response.body.daily.data[0].summary + " Il fait actuellement " + temperature + '°C et il y a ' + precipProbability*100 + "% de chance qu'il pleuve");
+        }
+    });
+}
+
+function displayJSONWeather(data, callback) {
+    const url = 'https://api.darksky.net/forecast/ad95e11dbf8fe6961a05425dea338c24/' + data.latitude + "," + data.longitude + '?units=si&lang=fr';
+
+    request({url: url, json: true}, (error, response) => {
+        if (error) {
+            callback("Unable to connect to weather API");
+        } else if (response.body.error) {
+            callback("Unable to find location\'s weather");
+        } else {
+            const summary = response.body.daily.data[0].summary;
+            const {temperature, precipProbability} = response.body.currently; 
+
+            callback(undefined, summary + " Il fait actuellement " + temperature + '°C et il y a ' + precipProbability*100 + "% de chance qu'il pleuve");
         }
     });
 }

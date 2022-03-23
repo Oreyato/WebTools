@@ -87,7 +87,7 @@ function displayWeather(data, callback) {
             /// const temperature = response.body.currently.temperature;
             /// const precipProbability = response.body.currently.precipProbability
 
-            callback(undefined, response.body.daily.data[0].summary + " Il fait actuellement " + temperature + '°C et il y a ' + precipProbability + "% de chance qu'il pleuve");
+            callback(undefined, response.body.daily.data[0].summary + " Il fait actuellement " + temperature + '°C et il y a ' + precipProbability*100 + "% de chance qu'il pleuve");
         }
     });
 }
