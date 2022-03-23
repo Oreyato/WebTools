@@ -41,3 +41,7 @@ Modify location :
 - modify the first argument of the function "weather" with the city you're interested in
 
 ### Weather app
+
+## React
+
+react website: https://reactjs.org/
