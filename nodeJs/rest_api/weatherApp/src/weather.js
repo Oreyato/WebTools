@@ -77,7 +77,7 @@ function weather(city, callback) {
     });
 }
 
-weather('Montpellier', (error, data) => {
+weather('Darwin', (error, data) => {
     console.log(data);
 });
 
