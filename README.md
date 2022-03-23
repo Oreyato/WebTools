@@ -47,3 +47,11 @@ Modify location :
 react website: https://reactjs.org/
 
 more CSS: https://www.w3schools.com/Css/default.asp
+
+To test the react webapp:
+
+- from Webtools/nodeJs/rest_api/weatherApp/src/ open the terminal and type
+- node app.js
+- then
+- from Webtools/nodeJs/rest_api/weatherApp/weather-react/src/ open the terminal and type
+- npm start
