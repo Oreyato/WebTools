@@ -44,18 +44,24 @@ function displayWeather(data, callback) {
 }
 
 function displayJSONWeather(data, callback) {
-    const url = 'https://api.darksky.net/forecast/ad95e11dbf8fe6961a05425dea338c24/' + data.latitude + "," + data.longitude + '?units=si&lang=fr';
+    const {latitude, longitude} = data;
+    const url = 'https://api.darksky.net/forecast/ad95e11dbf8fe6961a05425dea338c24/' + latitude + "," + longitude + '?units=si&lang=fr';
 
-    request({url: url, json: true}, (error, response) => {
+    request({url: url}, (error, response) => {
         if (error) {
             callback("Unable to connect to weather API");
-        } else if (response.body.error) {
+            return;
+        } 
+        const res = JSON.parse(response.body);
+        if (res.error) {
             callback("Unable to find location\'s weather");
         } else {
-            const summary = response.body.daily.data[0].summary;
-            const {temperature, precipProbability} = response.body.currently; 
+            // const summary = res.daily.data[0].summary;
+            // const {temperature, precipProbability} = res.currently; 
+            // data = {summary, temperature, precipProbability};
+            data = {summary: res.daily.data[0].summary, temperature: res.currently.temperature, precipProbability: res.currently.precipProbability};
 
-            callback(undefined, summary + " Il fait actuellement " + temperature + '°C et il y a ' + precipProbability*100 + "% de chance qu'il pleuve");
+            callback(undefined, data);
         }
     });
 }
@@ -67,7 +73,7 @@ function weather(city, callback) {
             console.log(error);
             return;
         }
-        displayWeather(data, callback);
+        displayJSONWeather(data, callback);
     });
 }
 

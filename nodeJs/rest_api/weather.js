@@ -60,7 +60,7 @@ function cityLocation(city, callback) {
             longitude = response.body.features[0].center[0];
     
             const data = {latitude, longitude}; // Shortcut for { latitude: latitude, longitude: longitude }
-
+                                                // (because they're written the same)
             console.log("Météo à " + city + ":");
             /*
             console.log(city + "'s location:");
