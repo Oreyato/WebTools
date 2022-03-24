@@ -8,26 +8,19 @@ import Menu from './Menu.js';
 import Footer from './Footer.js';
 
 // More infos here: https://reactjs.org/
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <Header/>
-//       <Menu/>
-//       <Body/>
-//       <Footer/>
-//     </div>
-//   );
-// }
+// Interesting article on react: https://codeburst.io/binding-functions-in-react-b168d2d006cb
 
 class App extends React.Component {
-  constructor() { // will allow to setup the state variables
+  constructor() { // will allow to setup the STATE VARIABLES
     super();
     this.state = { // this is the only time when it is possible to use "this.state = "
       summary: '',
       temperature: 0.0,
-      precip: 0.0
+      precip: 0.0,
+      cities: ['Montpellier', 'Montréal', 'Montgomery']
     }
+    // Interesting when you don't want to run the function immediately (here: only when the "button" are clicked)
+    this.changeCity = this.changeCity.bind(this);
   }
 
   componentDidMount() {
@@ -42,23 +35,35 @@ class App extends React.Component {
     });
   }
 
+  changeCity(city) {
+    console.log(city);
+    axios.get('/weather?city=' + city).then(response => {
+      this.setState({
+        summary: response.data.summary,
+        temperature: response.data.temperature,
+        precip: response.data.precipProbability
+      })
+    });
+  }
+
   render() {
-    var weather = '';
+    // var weather = '';
 
-    if (this.state.summary !== '') {
-      weather = <div>
-        <p>Temps: {this.state.summary}</p>
-        <p>Température: {this.state.temperature}</p>
-        <p>Risque de précip.: {this.state.precip*100}%</p>
-      </div>
-    }
+    // if (this.state.summary !== '') {
+    //   weather = <div>
+    //     <p>Temps: {this.state.summary}</p>
+    //     <p>Température: {this.state.temperature}</p>
+    //     <p>Risque de précip.: {this.state.precip*100}%</p>
+    //   </div>;
+    // }
 
+    // <Body <summ... --> we put three PROPS in the Body COMPONENT: summary, temperature, precip
+    // it allows us to use them inside Body
     return (
       <div className="App">
         <Header/>
-        <Menu/>
-        {weather}
-        <Body/>
+        <Menu cities={this.state.cities} changeCity={this.changeCity}/>
+        <Body summary={this.state.summary} temperature={this.state.temperature} precip={this.state.precip} /> 
         <Footer/>
       </div>
     );

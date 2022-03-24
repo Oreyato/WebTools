@@ -29,8 +29,8 @@ app.get('/help', (req, res) => {
 
 // http://localhost:4000/weather
 app.get('/weather', (req, res) => {
-    const weather = weatherLib.weather('Darwin', (error, data) => {
-        console.log(data);
+        weatherLib.weather(req.query.city, (error, data) => {
+        console.log(req.query.city);
         res.status(200).send(data); // status function send a status code to the client. 200 means a 'OK' status
     }); 
 });
