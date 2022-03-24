@@ -9,13 +9,11 @@ class Menu extends React.Component {
     }
 
     createMenuItem(city, func) {
-        return (<span><MenuItem label={city} function={func} /></span>);
+        return <span><MenuItem label={city} function={func} /></span>;
     }
     
     render() {
-        const menu = this.props.cities.map(city => {
-           this.createMenuItem(city, this.props.changeCity); 
-        });
+        const menu = this.props.cities.map(city => this.createMenuItem(city, this.props.changeCity));
 
         return (
             <div className='Menu'>

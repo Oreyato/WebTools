@@ -6,7 +6,7 @@ class MenuItem extends React.Component {
         const func = this.props.function;
 
         return (
-            <a href='clickedOnCity' onClick={() => func(label)}>{label}</a>
+            <a href='#' onClick={() => func(label)}>{label} </a>
         );
     }
 }
