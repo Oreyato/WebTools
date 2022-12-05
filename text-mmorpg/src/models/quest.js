@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 
-const Quest = mongoose.model('Quest', {
+const questSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -16,5 +16,7 @@ const Quest = mongoose.model('Quest', {
         default: false
     }
 });
+
+const Quest = mongoose.model('Quest', questSchema)
 
 module.exports = Quest;
