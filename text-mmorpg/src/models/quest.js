@@ -15,7 +15,7 @@ const questSchema = new mongoose.Schema({
         required: false,
         default: false
     }
-});
+}, { timestamps: true });
 
 const Quest = mongoose.model('Quest', questSchema)
 

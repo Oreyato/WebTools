@@ -37,8 +37,29 @@ const playerSchema = new mongoose.Schema({
                 throw new Error('Age must be strictly positive');
             }
         }
-    }
-});
+    },
+    currentQuest: {
+        type: mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref: 'Quest'
+    },
+    acceptedQuests: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref: 'Quest'
+    }],
+    finishedQuests: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref: 'Quest'
+    }]
+}, { timestamps: true });
+
+// playerSchema.virtual('quests', {
+//     ref: 'Quest',
+//     localField: '_id',
+//     foreignField: 'owner'
+// });
 
 const Player = mongoose.model('Player', playerSchema)
 
