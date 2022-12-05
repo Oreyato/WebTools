@@ -43,12 +43,7 @@ const playerSchema = new mongoose.Schema({
         required:true,
         ref: 'Quest'
     },
-    acceptedQuests: [{
-        type: mongoose.Schema.Types.ObjectId,
-        required:true,
-        ref: 'Quest'
-    }],
-    finishedQuests: [{
+    quests: [{
         type: mongoose.Schema.Types.ObjectId,
         required:true,
         ref: 'Quest'

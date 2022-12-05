@@ -15,10 +15,17 @@ router.post('/quests', async(req, res) => {
 });
 //^ POST =========================================================
 //v GET ==========================================================
-// Get all quests
+// Get quests - Query Param: isCompleted
 router.get('/quests', async (req, res) => {
     try {
-        const quests = await Quest.find({});
+        const completedQuery = req.query.isCompleted;
+        let quests = [];
+
+        if (completedQuery) {
+            quests = await Quest.find({ isCompleted: completedQuery });
+        } else {
+            quests = await Quest.find({});
+        }
         res.status(200).send(quests); 
     } catch(error) {
         res.status(500).send(); // 500 is the server status error

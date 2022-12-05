@@ -10,7 +10,7 @@ const questSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    completion: {
+    isCompleted: {
         type: Boolean,
         required: false,
         default: false
