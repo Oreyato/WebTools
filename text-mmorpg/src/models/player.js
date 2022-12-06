@@ -1,53 +1,53 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 
+function toLower (val) {
+    return val.toLowerCase();
+}
+// Comment faire, si je souhaite avoir plusieurs arguments
+
 const playerSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        set: toLower
     },
-    email: {
+    inGameName: {
         type: String,
         required: true,
         trim: true,
-        validate(value) {
-            if(!validator.isEmail(value)) {
-                throw new Error('Email is not valid');
-            }
-        }
+        set: toLower
     },
-    password: {
-        type: String,
+    class: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-        trim: true,
-        validate(value) {
-            if (value.length < 7) {
-                throw new Error('Password should have a minimum of 7 characters');
-            } else if (value.toLowerCase().includes('password')) {
-                throw new Error('Please write a safer password');
-            }
-        }
+        ref: 'Class'
     },
-    age: {
+    level: {
         type: Number,
         trim: true,
         validate(value) {
             if(value < 1) {
-                throw new Error('Age must be strictly positive');
+                throw new Error('Level must be strictly positive');
             }
         }
     },
+    equippedItems: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref: 'Item'
+    }],
+    inventory: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref: 'Item'
+    }],
     currentQuest: {
         type: mongoose.Schema.Types.ObjectId,
         required:true,
         ref: 'Quest'
-    },
-    quests: [{
-        type: mongoose.Schema.Types.ObjectId,
-        required:true,
-        ref: 'Quest'
-    }]
+    }
 }, { timestamps: true });
 
 // playerSchema.virtual('quests', {

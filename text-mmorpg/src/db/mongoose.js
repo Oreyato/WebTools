@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const fullConnectionURL = 'mongodb://127.0.0.1:27017/text-mmorpg'; // Database address
+const fullConnectionURL = 'mongodb://127.0.0.1:27017/adventure'; // Database address
 
 mongoose.connect(fullConnectionURL, {
     // userNewUrlParser: true,
