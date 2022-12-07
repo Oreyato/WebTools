@@ -4,7 +4,13 @@ const validator = require('validator')
 function toLower (val) {
     return val.toLowerCase();
 }
-// Comment faire, si je souhaite avoir plusieurs arguments
+function firstToCap(val) {
+    const firstLetter = val[0].toUpperCase();
+    const restOfTheName = val.slice(1).toLowerCase();
+
+    return firstLetter+restOfTheName;
+}
+// Comment faire, si je souhaite avoir plusieurs arguments ?
 
 const playerSchema = new mongoose.Schema({
     name: {
@@ -17,16 +23,19 @@ const playerSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        set: toLower
+        // Transform the inGameName into a name starting by a capital letter
+        set: firstToCap
     },
     class: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: 'Class'
     },
     level: {
         type: Number,
         trim: true,
+        required: false,
+        default: 1,
         validate(value) {
             if(value < 1) {
                 throw new Error('Level must be strictly positive');
@@ -35,17 +44,17 @@ const playerSchema = new mongoose.Schema({
     },
     equippedItems: [{
         type: mongoose.Schema.Types.ObjectId,
-        required:true,
+        required:false,
         ref: 'Item'
     }],
     inventory: [{
         type: mongoose.Schema.Types.ObjectId,
-        required:true,
+        required:false,
         ref: 'Item'
     }],
     currentQuest: {
         type: mongoose.Schema.Types.ObjectId,
-        required:true,
+        required:false,
         ref: 'Quest'
     }
 }, { timestamps: true });

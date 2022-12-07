@@ -7,6 +7,8 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json())
 
+const classRouter = require('./routers/class')
+app.use(classRouter)
 const playerRouter = require('./routers/player')
 app.use(playerRouter)
 const questRouter = require('./routers/quest')
@@ -17,7 +19,6 @@ app.listen(port, () => {
 });
 
 const Player = require('./models/player')
-const Quest = require('./models/quest')
 
 // const testQ2P = async () => {
 //     const player = await Player.findById('638e0b93eff54bc945c1289a')
