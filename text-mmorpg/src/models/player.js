@@ -10,7 +10,6 @@ function firstToCap(val) {
 
     return firstLetter+restOfTheName;
 }
-// Comment faire, si je souhaite avoir plusieurs arguments ?
 
 const playerSchema = new mongoose.Schema({
     name: {

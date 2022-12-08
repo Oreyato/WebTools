@@ -15,11 +15,11 @@ router.post('/players', async(req, res) => {
             // Log items
             console.log(player.inventory);
 
-            const inventory = Inventory({playerId: player._id, itemsIds: []});
+            const inventory = Inventory({owner: player._id, itemsIds: []});
             await inventory.save();
 
         } catch (error) {
-            res.status(400).send(error);
+            return res.status(400).send(error);
         }
 
         res.status(202).send(player); // 202 is the CREATED status
@@ -49,7 +49,8 @@ router.get('/players/:id', async (req, res) => {
         }
 
         // Log their items
-        console.log(player.inventory);
+        const inventory = await Inventory.find({playerId: player._id});
+        console.log(inventory);
 
         res.status(200).send(player); 
     } catch(error) {
