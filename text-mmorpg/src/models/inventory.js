@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 
 const inventorySchema = new mongoose.Schema({
-    playerId: {
+    owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Player'
