@@ -51,7 +51,7 @@ router.get('/players/:id', async (req, res) => {
 // Update player by ID
 router.patch('/players/:id', async (req, res) => {
     const updates = Object.keys(req.body);
-    const allowedUpdates = ['name', 'email', 'password', 'age'];
+    const allowedUpdates = ['inGameName', 'level', 'equippedItems', 'inventory', 'currentQuest'];
     const isValid = updates.every( update => allowedUpdates.includes(update));
     if (!isValid) {
         res.status(400).send

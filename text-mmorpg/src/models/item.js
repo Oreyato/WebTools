@@ -13,11 +13,12 @@ const itemSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true
+    },
+    subtype: {
+        type: String,
+        required: true
     }
 }, { timestamps: true });
-
-
-
 
 const Item = mongoose.model('Item', itemSchema)
 

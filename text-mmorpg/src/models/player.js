@@ -42,16 +42,6 @@ const playerSchema = new mongoose.Schema({
             }
         }
     },
-    equippedItems: [{
-        type: mongoose.Schema.Types.ObjectId,
-        required:false,
-        ref: 'Item'
-    }],
-    inventory: [{
-        type: mongoose.Schema.Types.ObjectId,
-        required:false,
-        ref: 'Item'
-    }],
     currentQuest: {
         type: mongoose.Schema.Types.ObjectId,
         required:false,
