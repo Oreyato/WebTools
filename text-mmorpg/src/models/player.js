@@ -47,13 +47,14 @@ const playerSchema = new mongoose.Schema({
         required:false,
         ref: 'Quest'
     }
-}, { timestamps: true });
+},
+{ timestamps: true });
 
-// playerSchema.virtual('quests', {
-//     ref: 'Quest',
-//     localField: '_id',
-//     foreignField: 'owner'
-// });
+playerSchema.virtual('inventory', {
+    ref: 'Inventory',
+    localField: '_id',
+    foreignField: 'owner'
+});
 
 const Player = mongoose.model('Player', playerSchema)
 

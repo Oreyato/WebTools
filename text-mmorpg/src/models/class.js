@@ -33,7 +33,7 @@ const classSchema = new mongoose.Schema({
         }
     }
 }, 
-{virtuals: {
+{ virtuals: {
     description: {
         get() {
             if (this.name == classNames[0]) {

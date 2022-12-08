@@ -1,23 +1,29 @@
 const express = require('express');
 const router = new express.Router();
 const Player = require('../models/player');
+const Inventory = require('../models/inventory')
 
 //v POST =========================================================
-// Create player - PROMISES
-// router.post('/players', (req, res) => {
-//     const player = Player(req.body);
-//     player.save().then(() => {
-//         res.status(202).send(player); // 202 is the CREATED status
-//     }).catch((error) => {
-//         res.status(400).send(error);
-//     });
-// });
 // Create player - ASYNC / AWAIT
 router.post('/players', async(req, res) => {
     const player = Player(req.body);
     try {
         await player.save();
+
+        try {
+            await player.populate('inventory');
+            // Log items
+            console.log(player.inventory);
+
+            const inventory = Inventory({playerId: player._id, itemsIds: []});
+            await inventory.save();
+
+        } catch (error) {
+            res.status(400).send(error);
+        }
+
         res.status(202).send(player); // 202 is the CREATED status
+        
     } catch(error) {
         res.status(400).send(error);
     }
@@ -41,6 +47,10 @@ router.get('/players/:id', async (req, res) => {
         if(!player) {
             return res.status(404).send(); // 400 is not found error
         }
+
+        // Log their items
+        console.log(player.inventory);
+
         res.status(200).send(player); 
     } catch(error) {
         res.status(500).send(); // 500 is the server status error

@@ -15,14 +15,14 @@ router.post('/inventories', async(req, res) => {
 });
 //^ POST =========================================================
 //v GET ==========================================================
-// Get inventories - Query Param: isCompleted
+// Get inventories - Query Param: playerId
 router.get('/inventories', async (req, res) => {
     try {
-        const completedQuery = req.query.isCompleted;
+        const plIdQuery = req.query.playerId;
         let inventories = [];
 
-        if (completedQuery) {
-            inventories = await Inventory.find({ isCompleted: completedQuery });
+        if (plIdQuery) {
+            inventories = await Inventory.find({ playerId: completedQuery });
         } else {
             inventories = await Inventory.find({});
         }
@@ -49,7 +49,7 @@ router.get('/inventories/:id', async (req, res) => {
 // Update inventory by ID
 router.patch('/inventories/:id', async (req, res) => {
     const updates = Object.keys(req.body);
-    const allowedUpdates = ['name', 'description', 'type'];
+    const allowedUpdates = ['playerId', 'itemsIds'];
     const isValid = updates.every( update => allowedUpdates.includes(update));
     if (!isValid) {
         res.status(400).send

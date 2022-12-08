@@ -23,3 +23,10 @@ app.listen(port, () => {
 });
 
 const Player = require('./models/player')
+
+// const testQ2P = async () => {
+//     const player = await Player.findById('6391a54c095ebfaef714a30d')
+//     await player.populate('inventory')
+//     console.log(player.inventory)
+// }
+// testQ2P()
